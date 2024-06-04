@@ -14,7 +14,6 @@ const Search = ({ onSearchChange }) => {
       .then((response) => {
         return {
           options: response.data.map((city) => {
-            console.log(city.latitude, city.longitude)
             return {
               value: `${city.latitude} ${city.longitude}`,
               label: `${city.name}, ${city.countryCode}`
@@ -29,19 +28,7 @@ const Search = ({ onSearchChange }) => {
     onSearchChange(searchData);
   };
 
-  const customStyles = {
-    control: (provided, state) => ({
-        ...provided,
-        borderRadius: '5px',
-        border: '2px solid #ccc',
-        boxShadow: state.isFocused ? '0 0 0 2px red' : null,
-    }),
-    option: (provided, state) => ({
-        ...provided,
-        backgroundColor: state.isFocused ? 'red' : null,
-        color: state.isFocused ? 'white' : null,
-    }),
-}
+
 
   return (
     <AsyncPaginate
@@ -50,8 +37,6 @@ const Search = ({ onSearchChange }) => {
       value={search}
       onChange={handleOnChange}
       loadOptions={loadOptions}
-      styles={customStyles}
-      className="trt"
     />
   );
 };

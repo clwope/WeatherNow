@@ -9,9 +9,30 @@ describe('Hava Durumu Bilgileri', () => {
       // We use the `cy.get()` command to get all elements that match the selector.
       // Then, we use `should` to assert that there are two matched items,
       // which are the two default items.
+      if(cy.get('.container > :nth-child(2)').should('have.text', 'Error: Could not access your location. Please try searching for a city.')){
+        console.log("we don't have your location")
+      }else{
+        console.log("we have your your location")
+      }
       cy.get('.css-6j8wv5-Input input').type('Adana')
-      cy.wait(4000);
-      cy.get('#react-select-3-option-0').click()
+      cy.wait(2000);
+      cy.get('#react-select-3-option-0').should('have.text', 'Adana, TR').click()
+      cy.get('.temperature').should('have.text', '41°C')
+      cy.get('.details > :nth-child(2)').should('contain.text', '40°C')
+      cy.get('.details > :nth-child(4)').should('contain.text', '17%')
+      cy.get('.accordion').should('be.visible')
+      cy.get('.accordion > :nth-child(1)').should('be.visible')
+      // cy.get('.accordion > :nth-child(1)').click()
+      cy.get('.accordion > :nth-child(1) > .accordion__heading').click()
+      cy.get('.accordion > :nth-child(1) > .accordion__heading > .accordion__button > .daily-item > .day').should('have.text', 'Wednesday')
+      // cy.get('.accordion > :nth-child(1) > .accordion__panel > .daily-details-grid').should('', 'Humidity:15')
+      cy.get('.accordion > :nth-child(1) > .accordion__panel > .daily-details-grid > :nth-child(2)').should('have.text', 'Humidity:15')
+      cy.get('.accordion > :nth-child(7)').should('be.visible')
+      cy.get('.accordion > :nth-child(7) > .accordion__heading').click()
+      cy.get('.accordion > :nth-child(7) > .accordion__heading > .accordion__button > .daily-item > .day').should('have.text', 'Tuesday')
+      cy.get('.accordion > :nth-child(7) > .accordion__panel > .daily-details-grid > :nth-child(4)').should('have.text', 'Wind speed:0.73 m/s')
+      // cy.get('.accordion > :nth-child(1) > .daily-item').should('be.visible')
+      // cy.get('.accordion > :nth-child(1)').click()
     //   Cypress.Commands.add('waitForElementToBeClickable', (selector) => {
     //     cy.get(selector).should('be.visible').should('not.be.covered');
     //   });
