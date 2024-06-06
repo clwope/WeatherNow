@@ -1,0 +1,17 @@
+{
+  "city": {
+    "name": "London"
+  },
+  "list": [
+    {
+      "main": {
+        "temp": 20
+      },
+      "weather": [
+        {
+          "description": "Partly cloudy"
+        }
+      ]
+    }
+  ]
+}
